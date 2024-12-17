@@ -986,16 +986,16 @@ local Games = {
 
 						game.Players.LocalPlayer.Character.Humanoid:UnequipTools()
 
-						if Tool.TextureId == "http://www.roblox.com/asset/?id=18961071084" then
+						if Tool.TextureId == "http://www.roblox.com/asset/?id=2421576431" then
 
 							ShowPopup("Godly Upgrade","This tool is already modded.","Ok")
 							return					
 
 						end
 
-						Tool.TextureId = "http://www.roblox.com/asset/?id=18961071084"
+						Tool.TextureId = "http://www.roblox.com/asset/?id=2421576431"
 
-						Tool.ToolTip = "poo"
+						Tool.ToolTip = "Godly Weapon"
 
 						Tool.Equipped:Connect(function()
 
@@ -1068,7 +1068,7 @@ local Games = {
 
 			{
 
-				Name = "Lock-Hit",
+				Name = "Swoop (READ DESC)",
 				Type = "Button",
 				Desc = "Equip any melee weapon and click this, Then when you hold it, Click when you swoop into somebody.",
 				Action = function(On)
@@ -1185,278 +1185,6 @@ local Games = {
 					else
 
 						ShowPopup("Lock-Hit","Please hold a melee.","Ok")
-
-					end
-
-				end,
-
-			},
-
-			{
-
-				Name = "Lock-Punch",
-				Type = "Button",
-				Desc = "Click this when your holding the infection punch tool to mod it.",
-				Action = function(On)
-
-					if game.Players.LocalPlayer.Character:FindFirstChild("Attack") then
-
-						local Tool = Instance.new("Tool")
-
-						Tool = game.Players.LocalPlayer.Character:FindFirstChild("Attack")
-
-						game.Players.LocalPlayer.Character.Humanoid:UnequipTools()
-
-						if Tool.TextureId == "http://www.roblox.com/asset/?id=13050670424" then
-
-							ShowPopup("Lock Punch","This tool is already modded.","Ok")
-							return					
-
-						end
-
-						Tool.TextureId = "http://www.roblox.com/asset/?id=13050670424"
-
-						Tool.ToolTip = "Equip to spam punch"
-
-						Tool.Activated:Connect(function()
-
-							Tool.Enabled = false
-							wait(1)
-							Tool.Enabled = true
-
-						end)
-
-						Tool.Equipped:Connect(function()
-
-							for _, Thing in game.Workspace:GetDescendants() do
-
-								if Thing:IsA("BasePart") then
-
-									Thing:SetAttribute("Collide",Thing.CanCollide)
-
-									Thing.CanCollide = false
-
-								end
-
-							end
-
-							local Move = Instance.new("BodyPosition",game.Players.LocalPlayer.Character.HumanoidRootPart)
-
-							Move.MaxForce *= 7
-							Move.P *= 2.5
-
-							local Stop = false					
-
-							game.Players.LocalPlayer.Character.Humanoid.PlatformStand = true
-
-							Tool.Unequipped:Connect(function()
-
-								for _, Thing in game.Workspace:GetDescendants() do
-
-									if Thing:IsA("BasePart") then
-
-										Thing.CanCollide = Thing:GetAttribute("Collide")
-
-									end
-
-								end
-
-								Move:Destroy()
-								Stop = true
-								game.Players.LocalPlayer.Character.Humanoid.PlatformStand = false
-
-							end)
-
-							while not Stop do
-
-								task.wait(0.1)
-
-								if Tool.Enabled == true then
-
-									spawn(function()
-
-										wait(0.5)
-										Tool:Activate()
-
-									end)
-
-								end
-
-								local player = game.Players.LocalPlayer
-								local root = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
-								if not root then return end
-
-								local Closest, CDist = nil, math.huge
-
-								for _, other in pairs(game.Players:GetPlayers()) do
-									if other ~= player and other.Team ~= player.Team and other.Character then
-										local otherRoot = other.Character:FindFirstChild("HumanoidRootPart")
-										if otherRoot then
-											local Dist = (root.Position - otherRoot.Position).Magnitude
-											if Dist < CDist then
-												Closest, CDist = otherRoot, Dist
-											end
-										end
-									end
-								end
-
-								if Closest then
-
-									if Tool.Enabled then
-
-										Move.Position = Closest.Position + (Closest.Velocity / 4) - Vector3.new(0,3,0)
-
-									else
-
-										Move.Position = Closest.Position + (Closest.Velocity / 4) + Vector3.new(0,50,0)
-
-									end
-
-								end
-
-							end
-
-						end)
-
-					else
-
-						ShowPopup("Lock Punch","Please hold the punch tool to mod it.","Ok")
-
-					end
-
-				end,
-
-			},
-
-			{
-
-				Name = "Lock-Grab",
-				Type = "Button",
-				Desc = "Click this when your holding the infection grab tool to mod it.",
-				Action = function(On)
-
-					if game.Players.LocalPlayer.Character:FindFirstChild("Grab") then
-
-						local Tool = Instance.new("Tool")
-
-						Tool = game.Players.LocalPlayer.Character:FindFirstChild("Grab")
-
-						game.Players.LocalPlayer.Character.Humanoid:UnequipTools()
-
-						if Tool.TextureId == "http://www.roblox.com/asset/?id=9759886280" then
-
-							ShowPopup("Lock Grab","This tool is already modded.","Ok")
-							return					
-
-						end
-
-						Tool.TextureId = "http://www.roblox.com/asset/?id=9759886280"
-
-						Tool.ToolTip = "Equip to spam grab"
-
-						Tool.Activated:Connect(function()
-
-							Tool.Enabled = false
-							wait(3)
-							Tool.Enabled = true
-
-						end)
-
-						Tool.Equipped:Connect(function()
-
-							for _, Thing in game.Workspace:GetDescendants() do
-
-								if Thing:IsA("BasePart") then
-
-									Thing:SetAttribute("Collide",Thing.CanCollide)
-
-									Thing.CanCollide = false
-
-								end
-
-							end
-
-							local Move = Instance.new("BodyPosition",game.Players.LocalPlayer.Character.HumanoidRootPart)
-
-							Move.P *= 2
-							Move.MaxForce *= 5
-
-							local Stop = false					
-
-							game.Players.LocalPlayer.Character.Humanoid.PlatformStand = true
-
-							Tool.Unequipped:Connect(function()
-
-								for _, Thing in game.Workspace:GetDescendants() do
-
-									if Thing:IsA("BasePart") then
-
-										Thing.CanCollide = Thing:GetAttribute("Collide")
-
-									end
-
-								end
-
-								Move:Destroy()
-								Stop = true
-								game.Players.LocalPlayer.Character.Humanoid.PlatformStand = false
-
-							end)
-
-							while not Stop do
-
-								task.wait(0.1)
-
-								if Tool.Enabled == true then
-
-									spawn(function()
-
-										wait(1)
-										Tool:Activate()
-
-									end)
-
-								end
-
-								local player = game.Players.LocalPlayer
-								local root = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
-								if not root then return end
-
-								local Closest, CDist = nil, math.huge
-
-								for _, other in pairs(game.Players:GetPlayers()) do
-									if other ~= player and other.Team ~= player.Team and other.Character then
-										local otherRoot = other.Character:FindFirstChild("HumanoidRootPart")
-										if otherRoot then
-											local Dist = (root.Position - otherRoot.Position).Magnitude
-											if Dist < CDist then
-												Closest, CDist = otherRoot, Dist
-											end
-										end
-									end
-								end
-
-								if Closest then
-
-									if Tool.Enabled then
-
-										Move.Position = Closest.Position + (Closest.Velocity / 3)
-
-									else
-
-										Move.Position = Closest.Position + (Closest.Velocity / 3) + Vector3.new(0,50,0)
-
-									end
-
-								end
-
-							end
-
-						end)
-
-					else
-
-						ShowPopup("Lock Grab","Please hold the grab tool to mod it.","Ok")
 
 					end
 
